@@ -4,8 +4,7 @@ Projeto 1 - Sistemas Operacinais 1s2014
 Sudoku multithread - modulo de resolucao
 Entrada: matriz 9x9 de caracteres, '1' a '9' pra representar uma posiçao ocupada,
 ou 'x' para representar uma posicao vazia
-Saida: tabuleiro preenchido com a solucao encontrada, ou mensagem de erro dizendo
-que nao h'a solucao.
+Saida: tabuleiro preenchido com a solucao encontrada.
 
 Author: Leonardo de Oliveira Silva RA108330
 */
