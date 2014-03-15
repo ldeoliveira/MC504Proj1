@@ -1,0 +1,157 @@
+Pré-requisitos: 
+===============
+Para executar os comandos especificados nas instruções,
+são necessários o compilador gcc e a ferramenta para controle de versão
+github. A versão do gcc usada para compilar o código durante o desenvolvimento
+foi a 4.7.2.
+
+Instruções gerais:
+==================
+1 - Primeiramente, deve-se clonar o repositório a fim de obter uma cópia 
+do mesmo em sua máquina local. Para isso, utilize a seguinte linha de comando no 
+terminal do Linux:
+	git clone https://github.com/ldeoliveira/MC504Proj1.git
+
+2 - Uma vez clonado, uma pasta nomeada "MC504Proj1" será criada no diretório
+corrente. Essa pasta contém os arquivos do repositório. Execute o seguinte comando
+para entrar na pasta:
+	cd MC504Proj1
+
+3 - Para compilar os arquivos sudoku_verificacao.c, sudoku_dica.c, e sudoku_resolucao.c,
+basta digitar o comando:
+	make
+
+4 - O comando make deve criar três arquivos executáveis: sudoku_verificacao, sudoku_dica,
+sudoku_resolucao. Siga as instruções específicas de cada um dos módulos a partir daqui.
+
+Módulo de verificação:
+===================
+O módulo de verificação tem como objetivo receber um diagrama completo do jogo sudoku e
+reportar ao usuário os erros presentes nesse diagrama, respeitando as regras do jogo.
+
+1 - Para executar o módulo de verificação, execute o comando
+	./sudoku_verificacao
+
+2 - Dados de entrada:
+	Para que o programa seja executado de forma correta, espera-se que o usuário insira como 
+entrada uma matriz 9x9 de números inteiros de 1 a 9 que representa o diagrama do sudoku a ser verificado.
+Para facilitar a visualização, distribua os números em 9 linhas com 9 números cada. 
+Veja um exemplo de entrada válida a seguir:
+
+8 6 1 3 4 7 2 9 5
+4 3 2 8 9 5 1 6 7
+9 5 7 1 6 2 4 8 3
+2 7 8 4 5 1 6 3 9 
+5 4 9 6 8 3 7 2 1 
+6 1 3 2 7 9 8 5 4
+3 2 4 9 1 8 5 7 6
+1 8 5 7 3 6 9 4 2
+7 9 6 5 2 4 3 1 8
+
+3 - Dados de saída: 
+	Após a inserção dos dados de entrada, o programa deverá exibir na saída padrão
+no mínimo um erro encontrado no diagrama. Se nenhum erro foi encontrado, uma mensagem indicando tal fato
+deve ser exibida. Exemplo de saída:
+
+	More than 1 occurence of number 2 on line 3.
+
+Note que esse exemplo de saída não está vinculado ao exemplo entrada anterior. Note ainda que as linhas
+estão numeradas de 1 a 9 de cima pra baixo, e as colunas de 1 a 9 da esquerda pra direita. O mesmo vale
+para as caixas 3x3.
+
+4 - Como alternativa, o usuário pode criar um arquivo "arq1.in" com os valores de entrada e usar o comando
+	./sudoku_verificacao < arq1.in
+para executar o programa com a entrada dada pelo arquivo criado. Isso facilita a realização dos testes do
+programa.
+
+Módulo de dicas:
+================
+O módulo de dicas tem como objetivo receber um diagrama incompleto do sudoku e imprimir na saída padrão o
+mesmo diagrama, desta vez preenchido com possíveis números que podem ser utilizados em cada posição vazia
+a fim de completar o diagrama respeitando-se as regras do sudoku.
+
+1 - Para executar o módulo de dicas, execute o comando
+	./sudoku_dica
+
+2 - Dados de entrada:
+	Para que o programa seja executado de forma correta, espera-se que o usuário insira como 
+entrada uma matriz 9x9 de caracteres, cada caracter pode ser ou um digito de 1 a 9 que representa 
+uma posição do diagrama que está preenchida, ou um x (xis minúsculo) que representa uma posição do
+diagrama que está vazia. Utilize exatamente um espaço em branco entre os caracteres. Para facilitar
+a visualização, eles podem ser distribuídos em 9 linhas. Veja um exemplo de entrada válida a seguir:
+
+x 6 1 x x x x 9 x
+4 3 x x 9 5 x 6 x
+9 x x 1 x 2 x x 3
+x x x 4 x 1 x x 9
+5 x 9 x x x 7 x 1
+6 x x 2 x 9 x x x
+3 x x 9 x 8 x x 6
+x 8 x 7 3 x x 4 2
+x 9 x x x x 3 1 x
+
+3 - Dados de saída: 
+	O programa deve exibir na saída padrão o tabuleiro inserido na entrada com os x's
+substituídos pelos números que cabem naquela posição. Os números correspondentes às dicas devem ser imprimidos
+entre parenteses. Veja um exemplo de saída:
+
+(278) 6 1 (38) (478) (347) (2458) 9 (4578) 
+4 3 (278) (8) 9 5 (128) 6 (78) 
+9 (57) (578) 1 (4678) 2 (458) (578) 3 
+(278) (27) (2378) 4 (5678) 1 (2568) (2358) 9 
+5 (24) 9 (368) (68) (36) 7 (238) 1 
+6 (147) (3478) 2 (578) 9 (458) (358) (458) 
+3 (12457) (2457) 9 (1245) 8 (5) (57) 6 
+(1) 8 (56) 7 3 (6) (59) 4 2 
+(27) 9 (24567) (56) (2456) (46) 3 1 (578)
+
+4 - Como alternativa, o usuário pode criar um arquivo "arq1.in" com os valores de entrada e usar o comando
+	./sudoku_dica < arq1.in
+para executar o programa com a entrada dada pelo arquivo criado. Isso facilita a realização dos testes do
+programa.
+
+Módulo de resolução
+====================
+O módulo de resolução tem como finalidade solucionar um diagrama do jogo sudoku a partir de um
+diagrama parcialmente completado, caso exista alguma solução.
+
+1 - Para executar o módulo de resolução, execute o comando
+	./sudoku_dica
+
+2 - Dados de entrada:
+	Para que o programa seja executado de forma correta, espera-se que o usuário insira como 
+entrada uma matriz 9x9 de caracteres, cada caracter pode ser ou um digito de 1 a 9 que representa 
+uma posição do diagrama que está preenchida, ou um x (xis minúsculo) que representa uma posição do
+diagrama que está vazia. Utilize exatamente um espaço em branco entre os caracteres. Para facilitar
+a visualização, eles podem ser distribuídos em 9 linhas. Veja um exemplo de entrada válida a seguir:
+
+x 6 1 x x x x 9 x
+4 3 x x 9 5 x 6 x
+9 x x 1 x 2 x x 3
+x x x 4 x 1 x x 9
+5 x 9 x x x 7 x 1
+6 x x 2 x 9 x x x
+3 x x 9 x 8 x x 6
+x 8 x 7 3 x x 4 2
+x 9 x x x x 3 1 x
+
+3 - Dados de saída: 
+	Espera-se que o programa exiba na saída padrão a(s) solução(ões) encontradas para um certo 
+diagrama incompleto. Caso não exista solução, nada acontece. Veja um exemplo de saída a seguir:
+
+ 8 6 1 3 4 7 2 9 5
+ 4 3 2 8 9 5 1 6 7
+ 9 5 7 1 6 2 4 8 3
+ 2 7 8 4 5 1 6 3 9
+ 5 4 9 6 8 3 7 2 1
+ 6 1 3 2 7 9 8 5 4
+ 3 2 4 9 1 8 5 7 6
+ 1 8 5 7 3 6 9 4 2
+ 7 9 6 5 2 4 3 1 8
+
+4 - Como alternativa, o usuário pode criar um arquivo "arq1.in" com os valores de entrada e usar o comando
+	./sudoku_resolucao < arq1.in
+para executar o programa com a entrada dada pelo arquivo criado. Isso facilita a realização dos testes do
+programa.
+
+=============================================================================================================
