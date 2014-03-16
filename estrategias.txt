@@ -1,0 +1,32 @@
+EStratégias Multithread Adotadas
+================================
+
+1 - Módulo de verificação
+	A verificação foi feita através de uma thread para cada linha, coluna e 
+caixa 3x3 do tabuleiro. No total foram 27 threads: 9 para as linhas, 9 para as 
+colunas e 9 para as caixas. Uma vez que nada é escrito na matriz do tabuleiro,
+a estratégia funciona bem e não usa memória extra. A primeira thread que acha um erro
+finaliza a execução do programa, ainda assim pode ocorrer de mais de um erro ser encontrado
+devido ao processamento paralelo.
+
+2 - Módulo de dicas
+	Para compor as dicas o tabuleiro, utilizou-se uma thread para cada número de 1 a 9:
+cada uma das threads irá procurar onde o seu número encaixa no tabuleiro e salvar esta posição
+em uma lista. No final, obtem-se um vetor de listas onde cada elemento do vetor contém uma lista 
+de posições em que aquele número pode ser colocado com segurança. Considerando que as threads estão 
+escrevendo em conjuntos disjuntos do vetor, a construção do vetor é segura e funcionou bem para diversos
+testes realizados. As principais desvantagens dessa estratégia foram o uso de memória extra e a 
+necessidade de realizar uma busca toda vez que uma posição vazia é encontrada na hora de imprimir 
+a saída.
+
+3 - Módulo de resolução
+	Para a resolução, as threads foram distribuídas entre tentativas. O algoritmo procura a primeira
+posição vazia do tabuleiro, em seguida, procura quais os números que cabem nesta posição sempre considerando
+as regras do jogo. Em seguida, o tabuleiro é replicado em um "tabuleiro de tentativa", em que a posição
+que antes estava vazia, agora contém um dos números que encaixam nela. Por exemplo, vamos supor que 
+a posição (1,0) seja a primeira encontrada e que os números 1, 3, e 7 podem ser colocados nela, serão
+criados 3 novos tabuleiros: um com cada número possível na posição (1,0). Depois disso, uma thread é
+acionada em cada tabuleiro de tentativa a fim de encontrar uma solução. Se nenhuma das tentativas retornou
+uma solução, então o tabuleiro não possui solução. Pode ocorrer de mais de uma das threads encontrar uma
+solução. Claramente, a principal desvantagem desta estratégia é o uso excessivo de memória devido às 
+replicações do tabuleiro.
